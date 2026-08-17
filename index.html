@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gestor de Operadores - OCR</title>
+<title>Personal de Distribución - OCR</title>
 <style>
 :root{
   --primary:#0f172a;
-  --secondary:#2563eb;
-  --success:#16a34a;
-  --danger:#dc2626;
+  --blue:#2563eb;
+  --green:#16a34a;
+  --red:#dc2626;
   --bg:#f1f5f9;
   --card:#ffffff;
   --border:#dbe2ea;
@@ -17,144 +17,108 @@
   --muted:#64748b;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
-.container{max-width:1250px;margin:auto;padding:24px}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+.container{max-width:1320px;margin:auto;padding:20px}
 .header{
-  background:linear-gradient(135deg,#0f172a,#1e3a8a);
-  color:white;border-radius:18px;padding:24px;
-  box-shadow:0 10px 30px rgba(15,23,42,.15);
+  background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;
+  border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(15,23,42,.15)
 }
-.header h1{margin:0 0 8px;font-size:28px}
+.header h1{margin:0 0 7px;font-size:28px}
 .header p{margin:0;color:#dbeafe}
 .card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:16px;padding:20px;margin-top:18px;
-  box-shadow:0 6px 20px rgba(15,23,42,.06);
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:20px;margin-top:18px;box-shadow:0 6px 20px rgba(15,23,42,.06)
 }
-.controls{
-  display:flex;gap:12px;flex-wrap:wrap;align-items:center;
-}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 input[type=file],input[type=text]{
-  border:1px solid var(--border);border-radius:10px;padding:11px;
-  background:white;
+  border:1px solid var(--border);border-radius:10px;padding:11px;background:#fff
 }
-button{
-  border:0;border-radius:10px;padding:11px 16px;
-  font-weight:700;cursor:pointer;
+button{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--blue);color:white}
+.btn-green{background:var(--green);color:white}
+.btn-dark{background:var(--primary);color:white}
+.btn-gray{background:#e2e8f0;color:var(--primary)}
+button:disabled{opacity:.55;cursor:not-allowed}
+.status{margin-top:14px;padding:12px;border-radius:10px;background:#eff6ff;color:#1d4ed8;font-weight:700}
+.preview{max-width:100%;max-height:420px;display:block;margin:16px auto 0;border:1px solid var(--border);border-radius:12px}
+.progressBox{display:none;margin-top:12px}
+.progress{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.progressBar{height:100%;width:0;background:var(--blue);transition:.2s}
+.small{font-size:12px;color:var(--muted)}
+.help{
+  margin-top:12px;padding:12px;border-radius:10px;background:#fffbeb;
+  border:1px solid #fde68a;color:#92400e
 }
-.btn-primary{background:var(--secondary);color:#fff}
-.btn-dark{background:#0f172a;color:#fff}
-.btn-green{background:var(--success);color:#fff}
-.btn-red{background:var(--danger);color:#fff}
-.btn-gray{background:#e2e8f0;color:#0f172a}
-button:disabled{opacity:.5;cursor:not-allowed}
-.status{
-  margin-top:14px;padding:12px;border-radius:10px;
-  background:#eff6ff;color:#1d4ed8;font-weight:600;
-}
-.preview{
-  max-height:380px;max-width:100%;display:block;margin:16px auto 0;
-  border-radius:12px;border:1px solid var(--border);
-}
-.stats{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;
-}
-.stat{
-  padding:16px;border-radius:12px;background:#f8fafc;border:1px solid var(--border);
-}
-.stat b{display:block;font-size:26px;margin-top:5px}
-.table-wrap{overflow:auto;margin-top:15px}
-table{width:100%;border-collapse:collapse;min-width:820px}
-th,td{border-bottom:1px solid var(--border);padding:12px;text-align:left}
-th{background:#f8fafc;position:sticky;top:0;z-index:1}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{padding:15px;background:#f8fafc;border:1px solid var(--border);border-radius:12px}
+.stat span{display:block;color:var(--muted);font-size:13px}
+.stat b{display:block;font-size:26px;margin-top:4px}
+.table-wrap{overflow:auto;margin-top:16px}
+table{width:100%;border-collapse:collapse;min-width:930px}
+th,td{padding:12px;border-bottom:1px solid var(--border);text-align:left}
+th{background:#f8fafc}
 td[contenteditable="true"]{outline:none}
 tr:hover{background:#f8fafc}
-.badge{
-  display:inline-block;padding:4px 8px;border-radius:999px;
-  background:#e0f2fe;color:#0369a1;font-weight:700;font-size:12px;
-}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
-.action{
-  display:inline-flex;align-items:center;justify-content:center;
-  text-decoration:none;border-radius:8px;padding:8px 10px;
-  font-size:13px;font-weight:700;color:white;
-}
-.whatsapp{background:#16a34a}
-.call{background:#2563eb}
-.delete{background:#dc2626;border:0}
-.small{font-size:12px;color:var(--muted)}
-#progressBox{display:none;margin-top:12px}
-.progress{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden}
-#progressBar{height:100%;width:0;background:#2563eb;transition:.2s}
-.help{
-  background:#fffbeb;border:1px solid #fde68a;color:#92400e;
-  padding:12px;border-radius:10px;margin-top:12px;
-}
-@media(max-width:700px){
-  .container{padding:12px}
-  .header h1{font-size:22px}
-  .stats{grid-template-columns:1fr}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#e0f2fe;color:#0369a1;font-weight:700;font-size:12px}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.action{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:700;color:white}
+.whatsapp{background:#16a34a}.call{background:#2563eb}.delete{background:#dc2626;border:0}
+.ok{color:#15803d}.warn{color:#b45309}
+@media(max-width:760px){
+  .container{padding:12px}.header h1{font-size:22px}.stats{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 <div class="container">
-
   <div class="header">
-    <h1>📋 Gestor de Personal de Distribución</h1>
-    <p>Carga una imagen, extrae automáticamente rutas, teléfonos y operadores, y contáctalos por WhatsApp o llamada.</p>
+    <h1>📋 Personal de Distribución</h1>
+    <p>Carga una imagen y extrae exactamente: RUTA, TELÉFONO y OPERADOR.</p>
   </div>
 
   <div class="card">
     <h2>1. Cargar imagen</h2>
     <div class="controls">
       <input id="imageInput" type="file" accept="image/*">
-      <button class="btn-primary" id="processBtn" disabled>🔎 Procesar imagen</button>
-      <button class="btn-gray" id="clearBtn">🗑 Limpiar</button>
-      <button class="btn-green" id="exportBtn">📥 Exportar Excel</button>
+      <button id="processBtn" class="btn-primary" disabled>🔎 Procesar imagen</button>
+      <button id="clearBtn" class="btn-gray">🗑 Limpiar</button>
+      <button id="exportBtn" class="btn-green">📥 Exportar Excel</button>
     </div>
-
-    <div id="status" class="status">Selecciona una imagen para comenzar.</div>
-
-    <div id="progressBox">
-      <div class="small">Procesando OCR...</div>
-      <div class="progress"><div id="progressBar"></div></div>
+    <div id="status" class="status">Selecciona una imagen. El procesamiento comenzará automáticamente.</div>
+    <div id="progressBox" class="progressBox">
+      <div id="progressText" class="small">Preparando...</div>
+      <div class="progress"><div id="progressBar" class="progressBar"></div></div>
     </div>
-
     <img id="preview" class="preview" style="display:none" alt="Vista previa">
     <div class="help">
-      <b>Importante:</b> el sistema usa OCR para leer la imagen. Si algún nombre o número queda incorrecto,
-      puedes editar directamente las celdas de la tabla antes de usar WhatsApp, llamar o exportar.
+      <b>Lectura mejorada:</b> el sistema separa las 3 columnas de la tabla y las lee por separado.
+      Después las vuelve a unir por la posición vertical de cada fila. Así evita perder los nombres y teléfonos
+      aunque el OCR se confunda en una fila.
     </div>
   </div>
 
   <div class="card">
     <h2>2. Resultado</h2>
-
     <div class="stats">
-      <div class="stat">Rutas encontradas<b id="routeCount">0</b></div>
-      <div class="stat">Operadores<b id="operatorCount">0</b></div>
-      <div class="stat">Teléfonos<b id="phoneCount">0</b></div>
+      <div class="stat"><span>Rutas</span><b id="routeCount">0</b></div>
+      <div class="stat"><span>Teléfonos</span><b id="phoneCount">0</b></div>
+      <div class="stat"><span>Operadores</span><b id="operatorCount">0</b></div>
+      <div class="stat"><span>Registros</span><b id="recordCount">0</b></div>
     </div>
 
     <div class="controls" style="margin-top:16px">
       <input id="searchInput" type="text" placeholder="🔎 Buscar ruta, teléfono u operador..." style="flex:1;min-width:250px">
-      <button class="btn-primary" id="addBtn">➕ Agregar operador</button>
+      <button id="addBtn" class="btn-dark">➕ Agregar operador</button>
     </div>
 
     <div class="table-wrap">
-      <table id="operatorsTable">
+      <table>
         <thead>
           <tr>
             <th>#</th>
             <th>RUTA</th>
             <th>TELÉFONO</th>
-            <th>OPERADOR / CHOFER</th>
+            <th>OPERADOR / CHOFER (3ª COLUMNA)</th>
             <th>CONTACTO</th>
             <th>ACCIÓN</th>
           </tr>
@@ -163,195 +127,354 @@ tr:hover{background:#f8fafc}
       </table>
     </div>
   </div>
-
-  <div class="card">
-    <h2>3. Uso en celular</h2>
-    <p>
-      Cuando abras este archivo desde un teléfono, el botón <b>📞 Llamar</b> abrirá la aplicación de llamadas
-      y <b>💬 WhatsApp</b> abrirá una conversación con el número del operador.
-    </p>
-    <p class="small">Los números se interpretan como celulares de Perú (+51).</p>
-  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-
 <script>
-const imageInput = document.getElementById('imageInput');
-const processBtn = document.getElementById('processBtn');
-const clearBtn = document.getElementById('clearBtn');
-const exportBtn = document.getElementById('exportBtn');
-const addBtn = document.getElementById('addBtn');
-const searchInput = document.getElementById('searchInput');
-const preview = document.getElementById('preview');
-const statusBox = document.getElementById('status');
-const tableBody = document.getElementById('tableBody');
-const progressBox = document.getElementById('progressBox');
-const progressBar = document.getElementById('progressBar');
+const imageInput=document.getElementById('imageInput');
+const processBtn=document.getElementById('processBtn');
+const clearBtn=document.getElementById('clearBtn');
+const exportBtn=document.getElementById('exportBtn');
+const addBtn=document.getElementById('addBtn');
+const searchInput=document.getElementById('searchInput');
+const preview=document.getElementById('preview');
+const statusBox=document.getElementById('status');
+const tableBody=document.getElementById('tableBody');
+const progressBox=document.getElementById('progressBox');
+const progressBar=document.getElementById('progressBar');
+const progressText=document.getElementById('progressText');
 
-let rows = [];
+let rows=[];
 
-imageInput.addEventListener('change', () => {
-  const file = imageInput.files[0];
-  if (!file) return;
-  preview.src = URL.createObjectURL(file);
-  preview.style.display = 'block';
-  processBtn.disabled = false;
-  statusBox.textContent = 'Imagen cargada. Pulsa "Procesar imagen".';
+imageInput.addEventListener('change',async()=>{
+  const file=imageInput.files[0];
+  if(!file)return;
+  preview.src=URL.createObjectURL(file);
+  preview.style.display='block';
+  processBtn.disabled=false;
+  await processImage();
 });
+processBtn.addEventListener('click',processImage);
 
-processBtn.addEventListener('click', async () => {
-  const file = imageInput.files[0];
-  if (!file) return;
+async function processImage(){
+  const file=imageInput.files[0];
+  if(!file)return;
 
-  processBtn.disabled = true;
-  progressBox.style.display = 'block';
-  progressBar.style.width = '0%';
-  statusBox.textContent = 'Iniciando OCR...';
+  processBtn.disabled=true;
+  progressBox.style.display='block';
+  progressBar.style.width='0%';
 
-  try {
-    const worker = await Tesseract.createWorker('spa', 1, {
-      logger: m => {
-        if (m.status) statusBox.textContent = 'OCR: ' + m.status;
-        if (typeof m.progress === 'number') {
-          progressBar.style.width = Math.round(m.progress * 100) + '%';
-        }
+  try{
+    const canvas=await prepareImage(file);
+    statusBox.textContent='Leyendo las tres columnas por separado...';
+
+    // Una sola instancia del worker; se reutiliza para las 3 columnas.
+    const worker=await Tesseract.createWorker('spa',1,{
+      logger:m=>{
+        if(m.status)progressText.textContent='OCR: '+m.status;
+        if(typeof m.progress==='number')progressBar.style.width=Math.round(m.progress*100/3)+'%';
       }
     });
 
-    const result = await worker.recognize(file);
+    await worker.setParameters({
+      tessedit_pageseg_mode:'6',
+      preserve_interword_spaces:'1',
+      user_defined_dpi:'300'
+    });
+
+    // Límites de columna para el formato mostrado:
+    // RUTA: 0-17%, TELÉFONO: 17-40%, OPERADOR: 40-100%.
+    // Se dejan márgenes mínimos para no cortar los caracteres.
+    const cols=splitColumns(canvas);
+
+    // La tabla original tiene 3 columnas. La tercera columna completa es
+    // OPERADOR / CHOFER; se lee de forma independiente para no perder nombres.
+    const routeOCR=await readColumn(worker,cols.route,'ruta');
+    progressBar.style.width='33%';
+
+    const phoneOCR=await readColumn(worker,cols.phone,'telefono');
+    progressBar.style.width='66%';
+
+    const operatorOCR=await readColumn(worker,cols.operator,'operador');
+    progressBar.style.width='100%';
+
     await worker.terminate();
 
-    const words = (result.data.words || []).filter(w => (w.text || '').trim());
-    rows = parseTable(words, result.data.text || '');
+    statusBox.textContent='Relacionando RUTA + TELÉFONO + OPERADOR/CHOFER...';
 
-    if (!rows.length) {
-      rows = fallbackParse(result.data.text || '');
+    rows=joinColumns(routeOCR,phoneOCR,operatorOCR);
+
+    // Rescate adicional: si algún registro quedó fuera, busca todas las
+    // rutas en una lectura completa de la imagen.
+    if(rows.length<5){
+      statusBox.textContent='Aplicando segunda lectura de respaldo...';
+      rows=await rescueFullImage(rows,canvas);
     }
 
+    rows.sort((a,b)=>Number(a.ruta)-Number(b.ruta));
     renderTable();
     updateStats();
 
-    statusBox.textContent = rows.length
-      ? `Proceso terminado: ${rows.length} registro(s) detectado(s).`
-      : 'No se detectaron registros. Prueba con una imagen más nítida.';
-  } catch (error) {
+    statusBox.innerHTML=rows.length
+      ? '<span class="ok">✅ Se encontraron '+rows.length+' rutas y sus datos asociados.</span>'
+      : '<span class="warn">⚠️ No se encontraron registros.</span>';
+
+  }catch(error){
     console.error(error);
-    statusBox.textContent = 'Error al procesar la imagen: ' + error.message;
-  } finally {
-    processBtn.disabled = false;
-    progressBox.style.display = 'none';
+    statusBox.textContent='Error al procesar: '+error.message;
+  }finally{
+    processBtn.disabled=false;
+    progressBox.style.display='none';
   }
-});
+}
 
-function parseTable(words, fullText) {
-  // Agrupa palabras por línea usando su posición vertical.
-  const sorted = [...words].sort((a,b) => {
-    const ay = a.bbox?.y0 || 0, by = b.bbox?.y0 || 0;
-    if (Math.abs(ay-by) > 8) return ay-by;
-    return (a.bbox?.x0 || 0) - (b.bbox?.x0 || 0);
-  });
+async function prepareImage(file){
+  const bitmap=await createImageBitmap(file);
+  const scale=Math.max(2,Math.min(4,2800/Math.max(bitmap.width,bitmap.height)));
+  const canvas=document.createElement('canvas');
+  canvas.width=Math.round(bitmap.width*scale);
+  canvas.height=Math.round(bitmap.height*scale);
 
-  const lines = [];
-  for (const word of sorted) {
-    const y = word.bbox?.y0 || 0;
-    let line = lines.find(l => Math.abs(l.y-y) <= 12);
-    if (!line) {
-      line = {y, words:[]};
-      lines.push(line);
-    }
-    line.words.push(word);
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});
+  ctx.fillStyle='#fff';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);
+
+  // Mantener detalles, solo aumentar ligeramente el contraste.
+  const image=ctx.getImageData(0,0,canvas.width,canvas.height);
+  const d=image.data;
+  for(let i=0;i<d.length;i+=4){
+    const gray=Math.round(.299*d[i]+.587*d[i+1]+.114*d[i+2]);
+    const v=Math.max(0,Math.min(255,(gray-128)*1.18+128));
+    d[i]=d[i+1]=d[i+2]=v;
   }
+  ctx.putImageData(image,0,0);
 
-  lines.sort((a,b)=>a.y-b.y);
+  return canvas;
+}
 
-  const out = [];
-  for (const line of lines) {
-    line.words.sort((a,b)=>(a.bbox?.x0||0)-(b.bbox?.x0||0));
-    const text = line.words.map(w => w.text).join(' ').replace(/\s+/g,' ').trim();
+function splitColumns(canvas){
+  const w=canvas.width;
 
-    // Ruta: 6 dígitos. Teléfono peruano: 9 dígitos.
-    const routeMatch = text.match(/\b(600\d{3})\b/);
-    const phoneMatch = text.match(/\b(9\d{8})\b/);
+  // Posiciones aproximadas de las 3 columnas de la imagen:
+  // 1ª = RUTA, 2ª = TELÉFONO, 3ª = OPERADOR/CHOFER.
+  // Dejamos la tercera columna con la mayor parte del ancho para conservar
+  // nombres largos como "CORONADO PHUN CESAR MARTIN".
+  const routeX=Math.round(w*0.18);
+  const phoneX=Math.round(w*0.39);
 
-    if (!routeMatch) continue;
+  return {
+    route:crop(canvas,0,routeX,0,canvas.height),
+    phone:crop(canvas,routeX,phoneX,0,canvas.height),
+    operator:crop(canvas,phoneX,w,0,canvas.height)
+  };
+}
 
-    let phone = phoneMatch ? phoneMatch[1] : '';
-    let name = text;
+function crop(source,x0,x1,y0,y1){
+  const c=document.createElement('canvas');
+  c.width=Math.max(10,x1-x0);
+  c.height=Math.max(10,y1-y0);
+  const ctx=c.getContext('2d');
+  ctx.fillStyle='#fff';
+  ctx.fillRect(0,0,c.width,c.height);
+  ctx.drawImage(source,x0,y0,x1-x0,y1-y0,0,0,c.width,c.height);
+  return c;
+}
 
-    name = name.replace(routeMatch[0], '');
-    if (phone) name = name.replace(phone, '');
-    name = name.replace(/\b(RUTAS?|CHOFERES?|PERSONAL DE DISTRIBUCIÓN)\b/gi,'');
-    name = name.replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9 .'-]/g,' ');
-    name = name.replace(/\s+/g,' ').trim();
+async function readColumn(worker,canvas,type){
+  const result=await worker.recognize(canvas);
+  const lines=(result.data.lines||[]).map(l=>({
+    text:normalize(l.text||''),
+    y:Number(l.bbox?.y0||0),
+    y1:Number(l.bbox?.y1||0)
+  })).filter(l=>l.text);
 
-    if (name && name.length < 4) name = '';
+  // Tesseract a veces entrega una sola línea enorme en tablas.
+  // Si faltan líneas, usamos palabras agrupadas por Y.
+  if(lines.length<4 && result.data.words){
+    return wordsToLines(result.data.words);
+  }
+  return lines;
+}
 
-    out.push({
-      ruta: routeMatch[1],
-      telefono: phone,
-      operador: name
+function wordsToLines(words){
+  const clean=(words||[]).filter(w=>(w.text||'').trim()).map(w=>({
+    text:normalize(w.text),
+    y:Number(w.bbox?.y0||0),
+    y1:Number(w.bbox?.y1||0)
+  })).sort((a,b)=>a.y-b.y);
+
+  const groups=[];
+  for(const w of clean){
+    const center=(w.y+w.y1)/2;
+    let g=groups.find(x=>Math.abs(x.center-center)<=14);
+    if(!g){g={center,items:[]};groups.push(g)}
+    g.items.push(w);
+    g.center=g.items.reduce((s,x)=>s+(x.y+x.y1)/2,0)/g.items.length;
+  }
+  return groups.sort((a,b)=>a.center-b.center).map(g=>({
+    text:normalize(g.items.map(x=>x.text).join(' ')),
+    y:g.center,
+    y1:g.center+20
+  }));
+}
+
+function joinColumns(routes,phones,operators){
+  // Filtrar encabezados y extraer únicamente registros válidos.
+  const rRows=routes.map(x=>({route:extractRoute(x.text),y:x.y})).filter(x=>x.route);
+  const pRows=phones.map(x=>({phone:extractPhone(x.text),y:x.y})).filter(x=>x.phone);
+  const oRows=operators.map(x=>({name:cleanOperator(x.text),y:x.y})).filter(x=>x.name);
+
+  const result=[];
+
+  // Para cada ruta, busca teléfono y nombre más cercano verticalmente.
+  for(const r of rRows){
+    const p=nearestLine(pRows,r.y,80);
+    const o=nearestLine(oRows,r.y,100);
+    result.push({
+      ruta:r.route,
+      telefono:p?p.phone:'',
+      operador:o?o.name:''
     });
   }
 
-  return cleanRows(out);
+  return dedupeRows(result);
 }
 
-function fallbackParse(text) {
-  const out = [];
-  const lines = text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-
-  for (const line of lines) {
-    const rm = line.match(/\b(600\d{3})\b/);
-    if (!rm) continue;
-    const pm = line.match(/\b(9\d{8})\b/);
-    let name = line.replace(rm[0],'').replace(pm ? pm[0] : '','')
-      .replace(/\b(RUTAS?|CHOFERES?)\b/gi,'').trim();
-    out.push({ruta:rm[1], telefono:pm ? pm[1] : '', operador:name});
+function nearestLine(list,y,maxDistance){
+  if(!list.length)return null;
+  let best=null,bestDistance=Infinity;
+  for(const item of list){
+    const d=Math.abs(item.y-y);
+    if(d<bestDistance){
+      bestDistance=d;
+      best=item;
+    }
   }
-  return cleanRows(out);
+  return bestDistance<=maxDistance?best:null;
 }
 
-function cleanRows(data) {
-  const seen = new Set();
-  return data.filter(r => {
-    const key = r.ruta + '|' + r.telefono + '|' + r.operador;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+function extractRoute(text){
+  let s=normalize(text).toUpperCase()
+    .replace(/O/g,'0')
+    .replace(/Q/g,'0')
+    .replace(/[IL|]/g,'1');
+
+  let m=s.match(/6002\d{2}/);
+  if(m)return m[0];
+
+  s=s.replace(/[\s-]+/g,'');
+  m=s.match(/6002\d{2}/);
+  return m?m[0]:'';
 }
 
-function renderTable() {
-  const q = searchInput.value.toLowerCase().trim();
-  tableBody.innerHTML = '';
+function extractPhone(text){
+  let s=normalize(text);
+  let m=s.match(/\b9\d{8}\b/);
+  if(m)return m[0];
 
-  rows.forEach((r, index) => {
-    const haystack = `${r.ruta} ${r.telefono} ${r.operador}`.toLowerCase();
-    if (q && !haystack.includes(q)) return;
+  // OCR puede separar los dígitos por espacios.
+  const digits=s.replace(/\D/g,'');
+  const all=digits.match(/9\d{8}/g);
+  return all?all[0]:'';
+}
 
-    const tr = document.createElement('tr');
+function cleanOperator(text){
+  return normalize(text)
+    .replace(/\b(PERSONAL|DISTRIBUCI[ÓO]N|RUTAS?|CHOFERES?|CHOFER)\b/gi,' ')
+    .replace(/6002\d{2}/g,' ')
+    .replace(/\b9\d{8}\b/g,' ')
+    .replace(/\s+/g,' ')
+    .replace(/^[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+/,'')
+    .replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9 .'-]/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
 
-    tr.innerHTML = `
-      <td>${index + 1}</td>
-      <td contenteditable="true" data-field="ruta">${escapeHtml(r.ruta)}</td>
-      <td contenteditable="true" data-field="telefono">${escapeHtml(r.telefono)}</td>
-      <td contenteditable="true" data-field="operador"><b>${escapeHtml(r.operador || 'SIN NOMBRE')}</b></td>
+async function rescueFullImage(existing,canvas){
+  const worker=await Tesseract.createWorker('spa',1,{logger:()=>{}});
+  await worker.setParameters({tessedit_pageseg_mode:'6',preserve_interword_spaces:'1',user_defined_dpi:'300'});
+  const res=await worker.recognize(canvas);
+  await worker.terminate();
+
+  const text=normalize(res.data.text||'').toUpperCase()
+    .replace(/O/g,'0')
+    .replace(/Q/g,'0')
+    .replace(/[IL|]/g,'1');
+
+  const routes=[...text.replace(/[\s-]+/g,'').matchAll(/6002\d{2}/g)].map(m=>m[0]);
+  const map=new Map(existing.map(x=>[x.ruta,x]));
+
+  for(const route of routes){
+    if(!map.has(route))map.set(route,{ruta:route,telefono:'',operador:''});
+  }
+  return dedupeRows([...map.values()]);
+}
+
+function dedupeRows(data){
+  const map=new Map();
+  for(const row of data){
+    if(!row.ruta)continue;
+    const old=map.get(row.ruta);
+    if(!old){map.set(row.ruta,row);continue}
+    const score=x=>(x.telefono?100:0)+(x.operador||'').length;
+    if(score(row)>score(old))map.set(row.ruta,row);
+  }
+  return [...map.values()];
+}
+
+function normalize(v){return String(v||'').replace(/\s+/g,' ').trim()}
+
+function normalizePhone(v){
+  const s=String(v||'').replace(/\D/g,'');
+  if(s.length===9&&s.startsWith('9'))return s;
+  if(s.length===11&&s.startsWith('51'))return s.slice(2);
+  return '';
+}
+
+function whatsappUrl(phone){
+  const n=normalizePhone(phone);
+  const msg=encodeURIComponent('Hola, soy supervisor de distribución. Me comunico contigo respecto a tu ruta.');
+  return n?`https://wa.me/51${n}?text=${msg}`:'#';
+}
+
+function callUrl(phone){
+  const n=normalizePhone(phone);
+  return n?`tel:+51${n}`:'#';
+}
+
+function escapeHtml(v){
+  return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+
+function renderTable(){
+  const q=searchInput.value.toLowerCase().trim();
+  tableBody.innerHTML='';
+
+  rows.forEach((row,index)=>{
+    const hay=`${row.ruta} ${row.telefono} ${row.operador}`.toLowerCase();
+    if(q&&!hay.includes(q))return;
+
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>${index+1}</td>
+      <td contenteditable="true" data-field="ruta">${escapeHtml(row.ruta)}</td>
+      <td contenteditable="true" data-field="telefono">${escapeHtml(row.telefono)}</td>
+      <td contenteditable="true" data-field="operador">${escapeHtml(row.operador||'OPERADOR NO DETECTADO')}</td>
       <td><span class="badge">+51</span></td>
       <td>
         <div class="actions">
-          <a class="action whatsapp" href="${whatsappUrl(r.telefono)}" target="_blank">💬 WhatsApp</a>
-          <a class="action call" href="${callUrl(r.telefono)}">📞 Llamar</a>
+          <a class="action whatsapp" href="${whatsappUrl(row.telefono)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="action call" href="${callUrl(row.telefono)}">📞 Llamar</a>
           <button class="action delete" onclick="deleteRow(${index})">🗑</button>
         </div>
       </td>
     `;
 
-    tr.querySelectorAll('[contenteditable="true"]').forEach(cell => {
-      cell.addEventListener('blur', () => {
-        const field = cell.dataset.field;
-        rows[index][field] = cell.innerText.trim();
+    tr.querySelectorAll('[contenteditable="true"]').forEach(cell=>{
+      cell.addEventListener('blur',()=>{
+        rows[index][cell.dataset.field]=cell.innerText.trim();
         renderTable();
         updateStats();
       });
@@ -361,87 +484,59 @@ function renderTable() {
   });
 }
 
-function deleteRow(index) {
-  if (confirm('¿Eliminar este operador?')) {
+function deleteRow(index){
+  if(confirm('¿Eliminar este operador?')){
     rows.splice(index,1);
     renderTable();
     updateStats();
   }
 }
 
-function whatsappUrl(phone) {
-  const p = normalizePhone(phone);
-  const text = encodeURIComponent('Hola, soy supervisor de distribución. Me comunico contigo respecto a tu ruta.');
-  return p ? `https://wa.me/51${p}?text=${text}` : '#';
+function updateStats(){
+  document.getElementById('routeCount').textContent=rows.filter(r=>r.ruta).length;
+  document.getElementById('phoneCount').textContent=rows.filter(r=>normalizePhone(r.telefono)).length;
+  document.getElementById('operatorCount').textContent=rows.filter(r=>r.operador).length;
+  document.getElementById('recordCount').textContent=rows.length;
 }
 
-function callUrl(phone) {
-  const p = normalizePhone(phone);
-  return p ? `tel:+51${p}` : '#';
-}
+searchInput.addEventListener('input',renderTable);
 
-function normalizePhone(phone) {
-  const p = String(phone || '').replace(/\D/g,'');
-  if (p.length === 9 && p.startsWith('9')) return p;
-  if (p.length === 11 && p.startsWith('51')) return p.substring(2);
-  return '';
-}
-
-function updateStats() {
-  document.getElementById('routeCount').textContent = rows.filter(x=>x.ruta).length;
-  document.getElementById('operatorCount').textContent = rows.filter(x=>x.operador).length;
-  document.getElementById('phoneCount').textContent = rows.filter(x=>normalizePhone(x.telefono)).length;
-}
-
-function escapeHtml(value) {
-  return String(value ?? '').replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
-  }[c]));
-}
-
-searchInput.addEventListener('input', renderTable);
-
-addBtn.addEventListener('click', () => {
-  rows.push({ruta:'', telefono:'', operador:'Nuevo operador'});
+addBtn.addEventListener('click',()=>{
+  rows.push({ruta:'',telefono:'',operador:'Nuevo operador'});
   renderTable();
   updateStats();
 });
 
-clearBtn.addEventListener('click', () => {
-  rows = [];
-  tableBody.innerHTML = '';
-  preview.style.display = 'none';
-  preview.removeAttribute('src');
-  imageInput.value = '';
-  processBtn.disabled = true;
+clearBtn.addEventListener('click',()=>{
+  rows=[];
+  renderTable();
   updateStats();
-  statusBox.textContent = 'Selecciona una imagen para comenzar.';
+  imageInput.value='';
+  preview.removeAttribute('src');
+  preview.style.display='none';
+  processBtn.disabled=true;
+  statusBox.textContent='Selecciona una imagen. El procesamiento comenzará automáticamente.';
 });
 
-exportBtn.addEventListener('click', () => {
-  if (!rows.length) {
-    alert('No hay datos para exportar.');
-    return;
-  }
-
-  const data = rows.map((r,i)=>({
-    '#': i+1,
-    'RUTA': r.ruta,
-    'TELÉFONO': r.telefono,
-    'OPERADOR / CHOFER': r.operador,
-    'WHATSAPP': normalizePhone(r.telefono) ? `https://wa.me/51${normalizePhone(r.telefono)}` : '',
-    'LLAMADA': normalizePhone(r.telefono) ? `tel:+51${normalizePhone(r.telefono)}` : ''
+exportBtn.addEventListener('click',()=>{
+  if(!rows.length){alert('No hay datos para exportar.');return}
+  const data=rows.map((r,i)=>({
+    '#':i+1,
+    'RUTA':r.ruta,
+    'TELÉFONO':r.telefono,
+    'OPERADOR / CHOFER':r.operador,
+    'WHATSAPP':normalizePhone(r.telefono)?`https://wa.me/51${normalizePhone(r.telefono)}`:'',
+    'LLAMADA':normalizePhone(r.telefono)?`tel:+51${normalizePhone(r.telefono)}`:''
   }));
-
-  const ws = XLSX.utils.json_to_sheet(data);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Operadores');
-  XLSX.writeFile(wb, 'personal_distribucion.xlsx');
+  const ws=XLSX.utils.json_to_sheet(data);
+  ws['!cols']=[{wch:6},{wch:12},{wch:16},{wch:40},{wch:45},{wch:22}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Operadores');
+  XLSX.writeFile(wb,'personal_distribucion.xlsx');
 });
 
-// Datos de ejemplo basados en la imagen cargada, para que el sistema pueda probarse
-// incluso antes de procesar otra imagen.
-rows = [
+// Datos visibles de ejemplo basados en la imagen proporcionada.
+rows=[
   {ruta:'600201',telefono:'975128628',operador:'SEMBRERA SANTOS'},
   {ruta:'600202',telefono:'963438604',operador:'ORDOÑEZ ALEX'},
   {ruta:'600203',telefono:'963742548',operador:'CELIO SERRANO SERRANO'},
@@ -458,8 +553,9 @@ rows = [
   {ruta:'600215',telefono:'926722378',operador:'HARRISON MAMANI'},
   {ruta:'600216',telefono:'926722378',operador:'HARRISON MAMANI'}
 ];
+
 renderTable();
 updateStats();
 </script>
 </body>
-</html>
+</html
